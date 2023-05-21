@@ -1,18 +1,18 @@
 // Styles
-import { Container, Flex } from "@/styles/Global";
-import { Text } from "@/styles/Text";
-import { Button } from "@/styles/Buttons";
+import { Container, Flex } from '@/styles/Global';
+import { Text } from '@/styles/Text';
+import { Button } from '@/styles/Buttons';
 
 // Components
-import { Stack } from "@/components/Stack";
-import { Project } from "@/components/Project";
-import { Contacts } from "@/components/Contacts";
+import { Stack } from '@/components/Stack';
+import { Project } from '@/components/Project';
+import { Contacts } from '@/components/Contacts';
 
 // Data
-import { stackData } from "@/utils/stackData";
-import { userData } from "@/utils/userData";
+import { stackData } from '@/utils/stackData';
+import { userData } from '@/utils/userData';
 
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaDownload, FaLinkedin } from 'react-icons/fa';
 
 // Page Style
 import {
@@ -25,11 +25,13 @@ import {
   ProjectsAreaSocialMediaMessage,
   ProjectAreaWrapperColumns,
   ProjectsAreaContent,
-} from "./style";
+} from './style';
+// import { HandEffect } from "@/components/HandEffect";
 
 export const Home = (): JSX.Element => {
   const gihubUrl = `https://github.com/${userData.githubUser}`;
   const portfolioUrl = `https://github.com/${userData.githubUser}/my-portfolio`;
+  const resumeUrl = `https://drive.google.com/file/d/1rZ8K6S03ZB33q28CD3OaZWOxYOw06-Ki/view`;
 
   return (
     <main id="home">
@@ -41,37 +43,41 @@ export const Home = (): JSX.Element => {
                 src={`https://github.com/${userData.githubUser}.png`}
                 alt={userData.nameUser}
                 title={userData.nameUser}
-                width={"48px"}
-                height={"48px"}
+                width={'48px'}
+                height={'48px'}
               />
-              <Text color="grey4">Hello, my name is {userData.nameUser}</Text>
+              <Text color="grey4">Hello I am {userData.nameUser}. 👋🏻</Text>
             </Flex>
             <Text as="h1" type="heading1" color="grey5">
-            I{" "}
+              I am{' '}
               <Text as="span" type="heading1" color="brand1">
-                love
-              </Text>{" "}
-              creating and{" "}
+                passionate
+              </Text>{' '}
+              about{' '}
               <Text as="span" type="heading1" color="brand1">
-                developing
-              </Text>{" "}
-              projects
+                crafting
+              </Text>{' '}
+              solutions and bringing new ideas to life.
             </Text>
             <Text type="body1" color="grey2">
-              Discover here in this environment, created especially for you, all
-              my projects and technologies
+              Welcome to my portfolio, a dedicated space created just for you!
+              Here, you'll find a showcase of some of my projects and
+              technologies. Don't forget to check out the contact section if you
+              have any feedback. 😉
             </Text>
             <HeaderButtonsArea>
               <Button as="a" type="primary" href="#projects">
                 See Projects
               </Button>
-              <Button as="a" type="outline" target="_blank" href={portfolioUrl}>
-                See my portfolio source code
+
+              <Button as="a" type="outline" target="_blank" href={resumeUrl}>
+                <span style={{ paddingRight: '10px' }}>Download Resume</span>
+                <FaDownload />
               </Button>
               <Button
                 color="grey5"
                 as="a"
-                css={{ "&:hover": { color: "$grey1" } }}
+                css={{ '&:hover': { color: '$grey1' } }}
                 type="circle"
                 target="_blank"
                 href={gihubUrl}
@@ -95,7 +101,7 @@ export const Home = (): JSX.Element => {
                 My projects
               </Text>
               <Text as="p" type="body1" color="grey2">
-                Some of my{" "}
+                Some of my{' '}
                 <Text as="span" color="brand5">
                   side projects
                 </Text>

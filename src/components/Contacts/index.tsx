@@ -1,6 +1,6 @@
-import { Container } from "@/styles/Global";
-import { Text } from "@/styles/Text";
-import { motion, useTransform, useViewportScroll } from "framer-motion";
+import { Container } from '@/styles/Global';
+import { Text } from '@/styles/Text';
+import { motion, useViewportScroll } from 'framer-motion';
 
 import {
   ContactSection,
@@ -10,11 +10,11 @@ import {
   ContactCard,
   ContactCardImage,
   ContactCardContent,
-} from "./style";
+} from './style';
 
-import { FaWhatsapp, FaEnvelopeOpen, FaLinkedin } from "react-icons/fa";
-import { useRef } from "react";
-import { userData } from "@/utils/userData";
+import { FaWhatsapp, FaEnvelopeOpen, FaLinkedin } from 'react-icons/fa';
+import { useRef } from 'react';
+import { userData } from '@/utils/userData';
 
 export const Contacts = () => {
   const ref = useRef(null);
@@ -22,16 +22,15 @@ export const Contacts = () => {
   const linkedInUrl = `https://www.linkedin.com/in/${userData.linkedinUser}`;
 
   const { scrollYProgress } = useViewportScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [0.1, 0.9]);
 
   return (
     <ContactSection id="contact">
       <Container>
         <ContactSectionContent ref={ref}>
-          <motion.div style={{ scale }}>
+          <motion.div style={{ opacity: scrollYProgress }}>
             <ContactSectionText>
               <Text type="heading2" color="grey4">
-                Let's talk and{" "}
+                Let's talk and{' '}
                 <Text as="span" type="heading2" color="brand1">
                   develop solutions for your company
                 </Text>
@@ -83,7 +82,7 @@ export const Contacts = () => {
                   target="_blank"
                   href={`mailto=${userData.emailUser}`}
                   onClick={() =>
-                    (window.location.href = "mailto:nekelpatrick.com")
+                    (window.location.href = `mailto:${userData.emailUser}`)
                   }
                 >
                   Send me an email

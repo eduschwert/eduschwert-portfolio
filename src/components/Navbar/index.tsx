@@ -1,6 +1,7 @@
-import { useState } from "react";
-import useMedia from "use-media";
-import { userData } from "@/utils/userData";
+import { useState } from 'react';
+import useMedia from 'use-media';
+import { userData } from '@/utils/userData';
+import { useThemeProvider } from '@/providers/DarkMode';
 
 import {
   Navbar as NavbarWrapper,
@@ -8,12 +9,12 @@ import {
   LogoTipoText,
   NavbarLinks,
   NavbarMobileArea,
-} from "./style";
+} from './style';
 
-import { FaBars } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
-import { Button } from "@/styles/Buttons";
-import { Container, Flex } from "@/styles/Global";
+import { FaLinkedin, FaBars } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
+import { Button } from '@/styles/Buttons';
+import { Container, Flex } from '@/styles/Global';
 
 export interface MenuButtonOpen {
   open: Boolean;
@@ -21,8 +22,11 @@ export interface MenuButtonOpen {
 }
 
 export const NavBar = (): JSX.Element => {
+  const linkedInUrl = `https://www.linkedin.com/in/${userData.linkedinUser}/`;
 
-  const isWide = useMedia({ maxWidth: "991px" });
+  const { darkMode, setDarkMode } = useThemeProvider();
+
+  const isWide = useMedia({ maxWidth: '991px' });
 
   document.title = userData.nameUser;
 
@@ -37,13 +41,17 @@ export const NavBar = (): JSX.Element => {
       <Container>
         <NavbarMobileArea>
           <LogoTipo>
-            <LogoTipoText>{userData.nameUser}</LogoTipoText>
+            <LogoTipoText as="a" target="_blank" href={linkedInUrl}>
+              {userData.nameUser}
+
+              <FaLinkedin style={{ marginLeft: '10px' }} />
+            </LogoTipoText>
           </LogoTipo>
           {isWide && (
             <Button
               type="icon"
               onClick={OpenMenu}
-              aria-label={!open ? "Abrir Menu" : "Fechar Menu"}
+              aria-label={!open ? 'Abrir Menu' : 'Fechar Menu'}
             >
               {!open ? <FaBars /> : <IoClose />}
             </Button>
@@ -51,6 +59,12 @@ export const NavBar = (): JSX.Element => {
         </NavbarMobileArea>
         <Flex>
           {isWide ? open && <NavLinks /> : <NavLinks />}
+          <Button
+            onClick={() => setDarkMode(!darkMode)}
+            type="toggleTheme"
+            aria-label="switch theme"
+            darkMode={darkMode}
+          />
         </Flex>
       </Container>
     </NavbarWrapper>
